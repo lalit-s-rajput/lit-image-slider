@@ -1,13 +1,6 @@
-/**
- * @license
- * Copyright 2019 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
 import {LitElement, html, css} from 'lit';
-//import {LitElement, html, css} from 'lit-element';
 import {customElement, property} from 'lit/decorators.js';
-
+import {styleMap} from 'lit/directives/style-map.js';
 @customElement('image-slider')
 export class ImageSlider extends LitElement {
   index = 0;
@@ -18,12 +11,14 @@ export class ImageSlider extends LitElement {
     this._imageArray = value;
     this.imageSource = this._imageArray[0];
   }
-  //imageArray: string[] = [];
   static override styles = css`
     :host {
       width: 700px;
       height: 500px;
       display: block;
+    }
+    .disabled {
+      display: none;
     }
     .container {
       display: flex;
@@ -52,14 +47,28 @@ export class ImageSlider extends LitElement {
   `;
 
   override render() {
-    //this.imageSource = this.imageArray[0];
+    const isButtonVisible = {
+      display: this._imageArray.length > 1 ? 'block' : 'none',
+    };
     return html`
       <div class="container">
-        <div class="left-button" @click="${this.leftButtonClick}">&larr;</div>
+        <div
+          style=${styleMap(isButtonVisible)}
+          class="left-button"
+          @click="${this.leftButtonClick}"
+        >
+          &larr;
+        </div>
         <div class="image-container">
           <img .src="${this.imageSource}" alt="" />
         </div>
-        <div class="right-button" @click="${this.rightButtonClick}">&rarr;</div>
+        <div
+          style=${styleMap(isButtonVisible)}
+          class="right-button"
+          @click="${this.rightButtonClick}"
+        >
+          &rarr;
+        </div>
       </div>
       <slot></slot>
     `;

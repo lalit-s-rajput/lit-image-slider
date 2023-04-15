@@ -4,19 +4,19 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-import {MyElement} from '../my-element.js';
+import {ImageSlider} from '../image-slider.js';
 
 import {fixture, assert} from '@open-wc/testing';
 import {html} from 'lit/static-html.js';
 
-suite('my-element', () => {
+suite('image-slider', () => {
   test('is defined', () => {
-    const el = document.createElement('my-element');
-    assert.instanceOf(el, MyElement);
+    const el = document.createElement('image-slider');
+    assert.instanceOf(el, ImageSlider);
   });
 
   test('renders with default values', async () => {
-    const el = await fixture(html`<my-element></my-element>`);
+    const el = await fixture(html`<image-slider></image-slider>`);
     assert.shadowDom.equal(
       el,
       `
@@ -28,7 +28,7 @@ suite('my-element', () => {
   });
 
   test('renders with a set name', async () => {
-    const el = await fixture(html`<my-element name="Test"></my-element>`);
+    const el = await fixture(html`<image-slider name="Test"></image-slider>`);
     assert.shadowDom.equal(
       el,
       `
@@ -40,7 +40,9 @@ suite('my-element', () => {
   });
 
   test('handles a click', async () => {
-    const el = (await fixture(html`<my-element></my-element>`)) as MyElement;
+    const el = (await fixture(
+      html`<image-slider></image-slider>`
+    )) as ImageSlider;
     const button = el.shadowRoot!.querySelector('button')!;
     button.click();
     await el.updateComplete;
@@ -55,7 +57,9 @@ suite('my-element', () => {
   });
 
   test('styling applied', async () => {
-    const el = (await fixture(html`<my-element></my-element>`)) as MyElement;
+    const el = (await fixture(
+      html`<image-slider></image-slider>`
+    )) as ImageSlider;
     await el.updateComplete;
     assert.equal(getComputedStyle(el).paddingTop, '16px');
   });

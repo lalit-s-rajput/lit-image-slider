@@ -3,9 +3,10 @@
 /test/
 custom-elements.json
 # top level source
-my-element.js
-my-element.js.map
-my-element.d.ts
-my-element.d.ts.map
+dist/test
+dist/image-slider.js
+dist/image-slider.js.map
+dist/image-slider.d.ts
+dist/image-slider.d.ts.map
 # only generated for size check
-my-element.bundled.js
+dist/image-slider.bundled.js

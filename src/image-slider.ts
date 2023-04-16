@@ -5,11 +5,16 @@ import {styleMap} from 'lit/directives/style-map.js';
 export class ImageSlider extends LitElement {
   index = 0;
   imageSource = '';
-  private _imageArray: string[] = [];
-  @property({type: Array})
-  set imageArray(value: string[]) {
-    this._imageArray = value;
-    this.imageSource = this._imageArray[0];
+  private _imageArray = [];
+  @property()
+  set imageArray(value: string) {
+    try {
+      this._imageArray = JSON.parse(value);
+      this.imageSource = this._imageArray[0];
+    } catch (e) {
+      //this._imageArray = value;
+      this.imageSource = value;
+    }
   }
   static override styles = css`
     :host {
@@ -48,7 +53,7 @@ export class ImageSlider extends LitElement {
 
   override render() {
     const isButtonVisible = {
-      display: this._imageArray.length > 1 ? 'block' : 'none',
+      display: this._imageArray?.length > 1 ? 'block' : 'none',
     };
     return html`
       <div class="container">
